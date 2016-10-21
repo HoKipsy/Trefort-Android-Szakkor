@@ -3,7 +3,7 @@ import java.util.Arrays;
 /**
  * Created by dawars on 10/21/16.
  */
-public class Szakkör4Feladat {
+public class Szakkor4Feladat {
     /**
      * @param m  összeg, amit ki akarunk fizetni
      * @param c  milyen értékű pénzeink vannak (tömb)         <-- bemenet, csak olvasni szabad
