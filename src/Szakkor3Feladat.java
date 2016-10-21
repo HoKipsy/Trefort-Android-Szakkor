@@ -1,4 +1,4 @@
-public class Main {
+public class Szakkor3Feladat {
 
 
     /**
@@ -45,14 +45,18 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println("----- 1. feladat -----");
         parity(2);
         parity(3);
         parity(5);
 
+        System.out.println("----- 2. feladat -----");
         squareArray(new int[]{1, 2, 3, 4, 5, 6, 7});
 
+        System.out.println("----- 3. feladat -----");
         digits(123456);
 
+        System.out.println("----- 4. feladat -----");
         prim(1000);
     }
 
