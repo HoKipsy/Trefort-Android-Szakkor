@@ -32,6 +32,12 @@ public class Szakkor4Feladat {
         return sum;
     }
 
+    /**
+     * Irjunk egy while ciklust a for ciklus mintajara, ami kiirja egy tomb osszes elemet
+     */
+    static void forWithWhile(String[] text){
+
+    }
 
     /**
      * TODO: Ez egy bonyolult, gondolkodos feladat, probaljatok ki a legegyszerubb megoldast, mirt nem mukodik?
@@ -58,6 +64,9 @@ public class Szakkor4Feladat {
 
 
         System.out.println("----- 3. feladat -----");
+        forWithWhile(new String[]{"alma", "korte",  "barack", "cseresznye", "banan", "gyumolcs", "szolo"});
+
+        System.out.println("----- 4. feladat -----");
         int[] c = new int[]{25, 20, 5, 1};  // teszt adat
         int[] db = new int[c.length];       // üres tömb a megoldásnak
         int n = felvalt(42, c, db);         // a függvényhívás után ide kerül a "return" értéke
