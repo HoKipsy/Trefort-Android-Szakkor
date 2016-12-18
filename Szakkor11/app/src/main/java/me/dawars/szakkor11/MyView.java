@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -54,6 +53,7 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback {
 
         // drawing a circle
         drawCircle(canvas, 300, getHeight() / 3, 250, paint);
+        drawSpiral(canvas, 300, 2 * getHeight() / 3, 3 * 360, 5, paint);
     }
 
     /**
@@ -66,8 +66,6 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback {
      * @param paint  ezzel rajzoljuk
      */
     private void drawCircle(Canvas canvas, float cx, float cy, float radius, Paint paint) {
-
-        // az algoritmus
         float prevX = cx + radius;
         float prevY = cy;
 
@@ -85,8 +83,6 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback {
             prevX = x;
             prevY = y;
         }
-
-        Log.v("Circle", prevX + " " + prevY);
     }
 
     /**
@@ -95,29 +91,26 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback {
      * @param canvas erre rajzolunk
      * @param cx     a spiral kozepenek az X koordinataja
      * @param cy     a spiral kozepenek az Y koordinataja
-     * @param radius a spiral kezdeti
-     * @param dRad   ennyivel noveljuk a sugarat lepesenkent
+     * @param degree hany fokot rajzoljunk, 360 = 1 teljes fordulat
+     * @param dRad   ennyivel noveljuk a sugarat
      * @param paint  ezzel rajzoljuk
      */
-    private void drawSpiral(Canvas canvas, float cx, float cy, float radius, float dRad, Paint paint) {
-
-        // az algoritmus
-        float prevX = cx + radius;
+    private void drawSpiral(Canvas canvas, float cx, float cy, float degree, float dRad, Paint paint) {
+        float prevX = cx;
         float prevY = cy;
 
+        float radius = 0;
 
-        int resolution = 5; // hany fokonkent lepkedunk, kisebb szebb kort eredmenyez
+        int resolution = 15; // hany fokonkent lepkedunk, kisebb szebb kort eredmenyez
 
-        for (int degree = resolution; degree <= 360; degree += resolution) {
-            // kiszamoljuk a korvonal adott pontjat a degree szognel
-            float x = radius * (float) Math.cos(Math.toRadians(degree));
-            float y = radius * (float) Math.sin(Math.toRadians(degree));
+        for (int deg = resolution; deg <= degree; deg += resolution) {
+            // kiszamoljuk a korvonal adott pontjat a deg szognel
+            float x = cx + radius * (float) Math.cos(Math.toRadians(deg));
+            float y = cy + radius * (float) Math.sin(Math.toRadians(deg));
 
-            canvas.drawLine(cx + prevX, cy + prevY, cx + x, cy + y, paint);
+            canvas.drawLine(prevX, prevY, x, y, paint);
 
-            // sugar novelese
             radius += dRad;
-
 
             // frissitjuk az elozo pont adatait
             prevX = x;
