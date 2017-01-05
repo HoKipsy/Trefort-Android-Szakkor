@@ -78,6 +78,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // other gestures, multitouch?
+
         objects.add(new PointF(event.getX(), event.getY()));
         tick();
         return super.onTouchEvent(event);
