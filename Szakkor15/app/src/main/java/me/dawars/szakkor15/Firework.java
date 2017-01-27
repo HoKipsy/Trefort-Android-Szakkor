@@ -4,38 +4,64 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by dawars on 1/13/17.
  */
 
 public class Firework {
 
-    private Paint paint = new Paint();
+    private final Random rand = new Random();
+    private static Paint paint = new Paint();
 
-    double x, y;
+    List<Particle> particles = new ArrayList<>();
+    Particle base;
+    private boolean exploded = false;
 
-    double vel = 150; // velocity
-    double acc = -10;// acceleration
-
-    // csinaljatok valtozot a sebessegnek es gyorsulasnak
-
-    public Firework(double x, double y) {
-
-        this.x = x;
-        this.y = y;
-        paint.setColor(Color.BLUE);
+    public Firework(Vec2 pos) {
+        base = new Particle(pos);
     }
 
     public void update() {
-        vel += acc;
+        base.update();
 
-        y -= vel;
+        if (!exploded) {
+            if (base.pos.y > 0) {
+                explode();
+            }
+        } else {
+            for (int i = 0; i < particles.size(); i++) {
+                particles.get(i).update();
+            }
+        }
+    }
 
+    private void explode() {
+        exploded = true;
+        for (int i = 0; i < 10; i++) {
+
+            Particle particle = new Particle(base.pos);
+            particle.vel = new Vec2(rand.nextInt(300) - 150, rand.nextInt(300) - 150);
+
+            particles.add(particle);
+        }
     }
 
     public void render(Canvas canvas) {
-        // draw a point on the canvas at x, y
+        if (!exploded) {
+            base.render(canvas);
+        } else {
+            for (int i = 0; i < particles.size(); i++) {
+                particles.get(i).render(canvas);
+            }
+        }
+    }
 
-        canvas.drawCircle((float) x, (float) y, 10, paint);
+    public boolean isDead() {
+        // FIXME
+        return false;
     }
 }

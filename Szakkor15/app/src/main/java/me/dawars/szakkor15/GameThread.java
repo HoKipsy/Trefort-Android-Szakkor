@@ -34,7 +34,7 @@ public class GameThread extends Thread {
 
 
         while (true) {
-            Log.i("TAG", "game thread");
+//            Log.i("TAG", "game thread");
 
             update();
 
@@ -62,9 +62,10 @@ public class GameThread extends Thread {
      * Updating game state
      */
     private void update() {
-        if(rand.nextInt(10) == 0){ // random idokozonkent letrehoz egy tuzijatekot
-            objects.add(new Firework(rand.nextInt(1080), rand.nextInt(1920))); // az x, y
-        }
+//        if(rand.nextInt(10) == 0){ // random idokozonkent letrehoz egy tuzijatekot
+//            Vec2 pos = new Vec2(rand.nextInt(1080), rand.nextInt(1920));
+//            objects.add(new Firework(pos)); // az x, y
+//        }
 
         for (int i = 0; i < objects.size(); i++) {
             Firework firework = objects.get(i);
@@ -73,12 +74,12 @@ public class GameThread extends Thread {
 
         for (int i = objects.size() - 1; i >= 0; i--) {
             Firework firework = objects.get(i);
-            if(firework.y > 10000){
+            if(firework.isDead()){
                 objects.remove(i);
             }
         }
 
-        Log.i("log", "fireworks " + objects.size());
+//        Log.i("log", "fireworks " + objects.size());
     }
 
     /**
@@ -95,6 +96,7 @@ public class GameThread extends Thread {
 
         Log.i("Tag", event.toString());
 
-        objects.add(new Firework(event.getX(), event.getY()));
+        Vec2 pos = new Vec2(event.getX(), event.getY());
+        objects.add(new Firework(pos));
     }
 }
