@@ -12,8 +12,14 @@ public class Vec2 {
         this.y = y;
     }
 
+    // TODO copy constructor, debug obj ID
+    public Vec2 copy() {
+        return new Vec2(x, y);
+    }
+
     public void add(Vec2 other) {
-        x = other.x;
-        y = other.y;
+        // TODO + sign
+        x += other.x;
+        y += other.y;
     }
 }

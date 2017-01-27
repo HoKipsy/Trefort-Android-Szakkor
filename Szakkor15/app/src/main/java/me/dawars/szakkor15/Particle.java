@@ -14,32 +14,33 @@ public class Particle {
 
 
     private final Random rand = new Random();
-    private static Paint paint = new Paint();
+    private Paint paint = new Paint(); // no static
 
-    Vec2 pos;
-    int color;
     int size;
+    Vec2 pos;
     Vec2 vel = new Vec2(0, -150); // velocity
-    double acc = -10;// acceleration
-
+    double acc = 10;// acceleration
+    int color;
     // csinaljatok valtozot a sebessegnek es gyorsulasnak
 
-    public Particle(Vec2 pos) {
+    public Particle(Vec2 pos, int color) {
         this.pos = pos;
-        this.size = rand.nextInt(20) + 10;
-        paint.setColor(Color.BLUE);
+        this.size = 5;
+        this.color = color;
+        paint.setColor(0xff000000 | color); // alpha value
     }
 
     public void update() {
         vel.y += acc;
-
         pos.add(vel);
-
     }
 
     public void render(Canvas canvas) {
         // draw a point on the canvas at x, y
-
         canvas.drawCircle(pos.x, pos.y, size, paint);
+    }
+
+    public boolean isDead() {
+        return pos.y >= 1000; // screen height
     }
 }

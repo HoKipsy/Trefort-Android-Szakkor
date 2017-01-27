@@ -41,7 +41,7 @@ public class GameThread extends Thread {
             Canvas canvas = holder.lockCanvas();
 
             if (canvas != null) {
-                canvas.drawColor(Color.WHITE);
+                canvas.drawColor(Color.argb(127, 0, 0, 0)); // TODO bg color
                 render(canvas); // rajzolunk
                 // befejezzuk a rajzolast es odaadjuk a rendszernek megjelenitesre:
                 holder.unlockCanvasAndPost(canvas);
@@ -62,10 +62,10 @@ public class GameThread extends Thread {
      * Updating game state
      */
     private void update() {
-//        if(rand.nextInt(10) == 0){ // random idokozonkent letrehoz egy tuzijatekot
-//            Vec2 pos = new Vec2(rand.nextInt(1080), rand.nextInt(1920));
-//            objects.add(new Firework(pos)); // az x, y
-//        }
+       /* if (rand.nextInt(10) == 0) { // FIXME random idokozonkent letrehoz egy tuzijatekot
+            Vec2 pos = new Vec2(rand.nextInt(1080), rand.nextInt(1920));
+            objects.add(new Firework(pos)); // az x, y
+        }*/
 
         for (int i = 0; i < objects.size(); i++) {
             Firework firework = objects.get(i);
@@ -74,7 +74,7 @@ public class GameThread extends Thread {
 
         for (int i = objects.size() - 1; i >= 0; i--) {
             Firework firework = objects.get(i);
-            if(firework.isDead()){
+            if (firework.isDead()) {
                 objects.remove(i);
             }
         }
